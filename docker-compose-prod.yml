@@ -7,20 +7,20 @@ x-logging: &x-logging
 
 services:
   postgres:
-    container_name: project_name__postgres
+    container_name: redrock_sheduler__postgres
     image: postgres:13
     env_file:
       - .env
     volumes:
       - postgres_data:/var/lib/postgresql/data/
-      
+
     logging: *x-logging
     restart: always
     networks:
       - iris
 
   app:
-    container_name: project_name__app
+    container_name: redrock_sheduler__app
     image: $DOCKER_NAMESPACE/$IMAGE_NAME:main
     command: bash docker-entrypoint.sh
     volumes:
@@ -32,9 +32,9 @@ services:
       - postgres
     networks:
       - iris
-    
+
   nginx:
-    container_name: project_name__nginx
+    container_name: redrock_sheduler__nginx
     build: ./nginx
 
     volumes:
@@ -50,7 +50,7 @@ services:
       - iris
 
   nginx-exporter:
-    container_name: project_name__nginx-exporter
+    container_name: redrock_sheduler__nginx-exporter
     build: ./nginx-exporter
 
     volumes: ["nginx_log_volume:/var/log/nginx/"]
@@ -65,6 +65,7 @@ volumes:
   nginx_log_volume:
   static_volume:
   media_volume:
+  pgadmin:
 
 networks:
   iris:

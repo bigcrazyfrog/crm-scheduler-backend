@@ -3,6 +3,7 @@ from django.http import HttpRequest, HttpResponse
 
 from ninja import NinjaAPI
 
+from apps.algorithm.api.routers import add_algorithms_router
 from config.settings import DEBUG
 
 # from apps.auth_jwt.api.routers import add_auth_router
@@ -30,6 +31,7 @@ def get_api() -> NinjaAPI:
     add_doctors_router(api=api)
     add_cabinets_router(api=api)
     add_intervals_router(api=api)
+    add_algorithms_router(api=api)
 
     return api
 
