@@ -22,6 +22,22 @@ class Cabinet(BaseModel):
         verbose_name=_("Description"),
         blank=True,
     )
+    start = models.TimeField(
+        auto_now=False, 
+        auto_now_add=False, 
+        blank=True,
+        null=True,
+        default=None,
+        help_text=_("Врямя начала работы кабинета"),
+    )
+    end = models.TimeField(
+        auto_now=False, 
+        auto_now_add=False, 
+        blank=True,
+        null=True,
+        default=None,
+        help_text=_("Врямя окончания работы кабинета"),
+    )
 
     class Meta:
         verbose_name = _("Cabinet")

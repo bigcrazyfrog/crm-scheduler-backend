@@ -41,6 +41,7 @@ JWT_REFRESH_TOKEN_LIFETIME = datetime.timedelta(days=int(env("JWT_REFRESH_TOKEN_
 # DATABASES - PostgreSQL
 # -----------------------------------------------------------------------------
 DATABASES["default"].update(
+    ENGINE=env("DB_ENGINE"),
     NAME=env("POSTGRES_NAME"),
     USER=env("POSTGRES_USER"),
     PASSWORD=env("POSTGRES_PASSWORD"),
@@ -65,3 +66,5 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+CSRF_TRUSTED_ORIGINS = ['https://redrock.mycum.ru']

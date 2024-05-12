@@ -8,6 +8,3 @@ class AlgorithmAppConfig(AppConfig):
     name = "apps.algorithm"
     verbose_name = _("algorithm")
 
-    def ready(self):
-        # pylint: disable=unused-import
-        import apps.algorithm.api.schemas  # noqa

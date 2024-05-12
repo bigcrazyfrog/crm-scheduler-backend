@@ -16,6 +16,8 @@ class CabinetAdmin(BaseAdmin):
     list_display = (
         "number",
         "description",
+        "start",
+        "end",
     )
     search_fields = (
         "number",
@@ -37,6 +39,15 @@ class CabinetAdmin(BaseAdmin):
             {
                 "fields": (
                     "description",
+                ),
+            },
+        ),
+        (
+            _("Time"),
+            {
+                "fields": (
+                    "start",
+                    "end",
                 ),
             },
         ),
