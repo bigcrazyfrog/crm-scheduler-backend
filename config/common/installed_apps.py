@@ -15,6 +15,7 @@ LOCAL_APPS = [
     "apps.doctors",
     "apps.intervals",
     "apps.algorithm",
+    "apps.schedule",
 ]
 
 INSTALLED_APPS += LOCAL_APPS
