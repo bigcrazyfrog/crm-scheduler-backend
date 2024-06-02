@@ -38,6 +38,11 @@ class Cabinet(BaseModel):
         default=None,
         help_text=_("Врямя окончания работы кабинета"),
     )
+    schedule = models.ForeignKey(
+        "schedule.Schedule",
+        on_delete=models.CASCADE,
+        related_name="cabinets",
+    )
 
     class Meta:
         verbose_name = _("Cabinet")
