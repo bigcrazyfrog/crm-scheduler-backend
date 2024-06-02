@@ -31,6 +31,11 @@ class Interval(BaseModel):
         null=True,
         default=None,
     )
+    schedule = models.ForeignKey(
+        "schedule.Schedule",
+        on_delete=models.CASCADE,
+        related_name="cabinets",
+    )
 
     class Meta:
         verbose_name = _("Interval")
