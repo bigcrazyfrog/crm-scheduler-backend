@@ -1,6 +1,7 @@
 from apps.doctors.models import Doctor
 from apps.intervals.models import Interval
 
+from apps.algorithm.test_data.service import *
 
 def make_schedule(
     doctors: list[Doctor],
