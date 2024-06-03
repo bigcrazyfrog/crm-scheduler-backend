@@ -28,6 +28,8 @@ DEBUG = env("DEBUG")
 ALLOWED_HOSTS = env("ALLOWED_HOSTS").split()
 SECRET_KEY = env("SECRET_KEY")
 
+CSRF_TRUSTED_ORIGINS = env("CSRF_TRUSTED_ORIGINS").split()
+
 # -----------------------------------------------------------------------------
 # JSON Web Token (JWT)
 # https://datatracker.ietf.org/doc/html/rfc7519
