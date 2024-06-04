@@ -20,7 +20,7 @@ def get_intervals_router() -> Router:
         "/",
         ["POST"],
         interval_handlers.add,
-        response={201: IntervalOut, 400: Message},
+        response={201: IntervalOut, 400: Message, 404: Message},
     )
 
     router.add_api_operation(

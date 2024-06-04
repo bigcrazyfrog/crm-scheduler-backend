@@ -1,8 +1,8 @@
 from django.http import HttpRequest
 
+from apps.core.api.schemas import Message
 from apps.schedule.api.schemas import ScheduleAdd, ScheduleOut
 from apps.schedule.models import Schedule
-from apps.core.api.schemas import Message
 
 
 def all(

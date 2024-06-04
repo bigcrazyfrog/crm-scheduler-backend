@@ -1,8 +1,8 @@
 from ninja import NinjaAPI, Router
 
 import apps.schedule.api.handlers as schedule_handlers
-from apps.schedule.api.schemas import ScheduleOut
 from apps.core.api.schemas import Message
+from apps.schedule.api.schemas import ScheduleOut
 
 
 def get_schedules_router() -> Router:

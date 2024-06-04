@@ -11,9 +11,11 @@ class IntervalAdmin(BaseAdmin):
     """UI for `Interval` model."""
 
     ordering = (
+        "schedule",
         "start",
     )
     list_display = (
+        "schedule",
         "start",
         "end",
         "doctor",
@@ -31,6 +33,7 @@ class IntervalAdmin(BaseAdmin):
             None, {
                 "fields": (
                     "id",
+                    "schedule",
                 ),
             },
         ),

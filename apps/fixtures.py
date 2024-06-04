@@ -1,5 +1,4 @@
 from django.test import Client
-
 from faker import Faker
 
 from apps.auth_jwt.services import generate_tokens
