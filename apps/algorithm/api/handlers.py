@@ -1,7 +1,9 @@
 from django.http import HttpRequest
 
 from apps.algorithm.services import make_schedule, make_schedule_v2
-from apps.algorithm.test_data.service import generate_random_data_for_cabinets, generate_random_data_for_doctors, generate_random_data_for_intervals, remove_all_data
+from apps.algorithm.test_data.service import (
+    generate_random_data_for_cabinets, generate_random_data_for_doctors,
+    generate_random_data_for_intervals, remove_all_data)
 from apps.core.api.schemas import Message
 from apps.doctors.models import Doctor
 from apps.intervals.models import Interval

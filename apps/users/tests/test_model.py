@@ -1,6 +1,5 @@
 from django.db.utils import IntegrityError
 from django.test import TestCase
-
 from faker import Faker
 
 from apps.users.factories import UserFactory

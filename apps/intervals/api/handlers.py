@@ -3,6 +3,7 @@ from django.http import HttpRequest
 from apps.core.api.schemas import Message
 from apps.doctors.models import Doctor
 from apps.intervals.api.schemas import IntervalAdd, IntervalOut
+from apps.schedule.models import Schedule
 
 from ..models import Interval
 
@@ -24,10 +25,15 @@ def add(
     if doctor is None:
         return 404, {"message": "Doctor not found"}
 
+    schedule = Schedule.objects.filter(id=interval_data.schedule).first()
+    if schedule is None:
+        return 404, {"message": "Schedule not found"}
+
     interval = Interval.objects.create(
         start=interval_data.start,
         end=interval_data.end,
         doctor=doctor,
+        schedule=schedule,
     )
     return 201, interval
 
@@ -62,9 +68,14 @@ def update(
     if doctor is None:
         return 404, {"message": "Doctor not found"}
 
+    schedule = Schedule.objects.filter(id=interval_data.schedule).first()
+    if schedule is None:
+        return 404, {"message": "Schedule not found"}
+
     interval.start = interval_data.start
     interval.end = interval_data.end
     interval.doctor = doctor
+    interval.schedule = schedule
     interval.save()
 
     return 200, interval

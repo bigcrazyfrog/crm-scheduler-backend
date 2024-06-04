@@ -1,17 +1,15 @@
 from django.forms import ValidationError
 from django.http import HttpRequest, HttpResponse
-
 from ninja import NinjaAPI
 
 from apps.algorithm.api.routers import add_algorithms_router, add_tests_router
-from apps.schedule.api.routers import add_schedules_router
-from config.settings import DEBUG
-
 # from apps.auth_jwt.api.routers import add_auth_router
 # from apps.auth_jwt.middlewares import HTTPJWTAuth
 from apps.cabinets.api.routers import add_cabinets_router
 from apps.doctors.api.routers import add_doctors_router
 from apps.intervals.api.routers import add_intervals_router
+from apps.schedule.api.routers import add_schedules_router
+from config.settings import DEBUG
 
 # from apps.users.api.routers import add_users_router
 
