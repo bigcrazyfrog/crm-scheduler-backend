@@ -19,7 +19,7 @@ def add(
 ) -> tuple[int, Message | list[CabinetOut]]:
     """Add new cabinet to database."""
     cabinet = Cabinet.objects.create(
-        title=cabinet_data.number,
+        number=cabinet_data.number,
         description=cabinet_data.description,
     )
     return 201, cabinet
@@ -47,12 +47,11 @@ def update(
     """Update existing cabinet fields."""
     cabinet = Cabinet.objects.filter(
         id=cabinet_id,
-        author=request.user,
     ).first()
     if cabinet is None:
-        return 404, {"message": "Quiz not found"}
+        return 404, {"message": "Cabinet not found"}
 
-    cabinet.title = cabinet_data.title
+    cabinet.number = cabinet_data.number
     cabinet.description = cabinet_data.description
     cabinet.save()
 
@@ -66,10 +65,9 @@ def delete(
     """Delete cabinet from database."""
     cabinet = Cabinet.objects.filter(
         id=cabinet_id,
-        author=request.user,
     ).first()
     if cabinet is None:
-        return 404, {"message": "Quiz not found"}
+        return 404, {"message": "Cabinet not found"}
 
     cabinet.delete()
     return 200, {"message": "Successful delete"}
