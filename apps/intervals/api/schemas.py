@@ -2,7 +2,7 @@ from ninja import ModelSchema
 
 from apps.cabinets.api.schemas import CabinetOut
 from apps.doctors.api.schemas import DoctorOut
-from apps.schedule.api.schemas import ScheduleAdd
+from apps.schedule.api.schemas import ScheduleOut
 
 from ..models import Interval
 
@@ -19,7 +19,7 @@ class IntervalOut(ModelSchema):
     """Schema for output Interval."""
 
     doctor: DoctorOut
-    schedule: ScheduleAdd
+    schedule: ScheduleOut
     cabinet: CabinetOut | None
 
     class Meta:
