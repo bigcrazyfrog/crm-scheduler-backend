@@ -24,4 +24,4 @@ class IntervalOut(ModelSchema):
 
     class Meta:
         model = Interval
-        fields = ["start", "end"]
+        fields = ["id", "start", "end"]
