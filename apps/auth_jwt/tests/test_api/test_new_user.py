@@ -1,6 +1,7 @@
 import json
 
 from django.test import Client, TestCase
+
 from faker import Faker
 
 fake = Faker()
