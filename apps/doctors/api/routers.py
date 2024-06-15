@@ -17,14 +17,28 @@ def get_doctors_router() -> Router:
     )
 
     router.add_api_operation(
-        "/{student_id}",
+        "/",
+        ["POST"],
+        doctor_handlers.add,
+        response={201: DoctorOut, 400: Message, 404: Message},
+    )
+
+    router.add_api_operation(
+        "/{doctor_id}",
         ["GET"],
         doctor_handlers.get,
         response={200: DoctorOut, 400: Message, 404: Message},
     )
 
     router.add_api_operation(
-        "/{student_id}",
+        "/{doctor_id}",
+        ["PUT"],
+        doctor_handlers.update,
+        response={200: DoctorOut, 400: Message, 404: Message},
+    )
+
+    router.add_api_operation(
+        "/{doctor_id}",
         ["DELETE"],
         doctor_handlers.delete,
         response={200: Message, 400: Message, 404: Message},
