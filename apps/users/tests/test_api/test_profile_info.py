@@ -1,6 +1,7 @@
 import json
 
 from django.test import TestCase
+
 from faker import Faker
 
 from apps.fixtures import AuthClient

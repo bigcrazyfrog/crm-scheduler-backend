@@ -1,4 +1,4 @@
-from apps.algorithm.test_data.service import *
+from apps.algorithm.test_data.service import *  # noqa: F403 F401
 from apps.doctors.models import Doctor
 from apps.intervals.models import Interval
 
@@ -7,28 +7,30 @@ def make_schedule(
     doctors: list[Doctor],
     intervals: list[Interval],
 ) -> list[Interval]:
-    """Моя кривая версия распредилениея кабинетов"""
-    
-    for interval in intervals: # идем по каждому интервалу
+    """Моя кривая версия распредилениея кабинетов."""
+    for interval in intervals:
+        # идем по каждому интервалу
         # и проверяем, есть ли кабинет, если уже есть, то пропускаем
         if interval.cabinet is not None:
             continue
-        
+
         doctor = interval.doctor
-        # сюда складываем доступные для выбора кабинеты, в которых может принимать 
+        # сюда складываем доступные для выбора кабинеты,
+        # в которых может принимать
         # этот доктор, если кабинет доступен, то True
         avaliable_cabinets = {}
         # добавляем кабинеты в которых может принимать доктор
-        # в доступные кабинеты 
+        # в доступные кабинеты
         for cabinet in doctor.cabinets.all():
-            avaliable_cabinets[cabinet] = True 
+            avaliable_cabinets[cabinet] = True
 
         # перебираем дугие интервалы на наличие пересечений с нашим интервалом
         for interval2 in intervals:
-            if interval2.cabinet is None: # если кабинет не задан, пересечения нет
+            if interval2.cabinet is None:
+                # если кабинет не задан, пересечения нет
                 continue
 
-            if ( # проверка пересечение
+            if (  # проверка пересечение
                 interval2.start <= interval.start < interval2.end or
                 interval2.start < interval.end <= interval2.end
             ):
@@ -36,15 +38,15 @@ def make_schedule(
                 avaliable_cabinets[interval2.cabinet] = False
 
         if (
-            doctor.priority_cabinet is not None 
+            doctor.priority_cabinet is not None
             and avaliable_cabinets[doctor.priority_cabinet]
         ):
-            # если у врача есть приорететный кабинет и он доступен, 
+            # если у врача есть приорететный кабинет и он доступен,
             # выбираем его
             interval.cabinet = doctor.priority_cabinet
             interval.save()
-        else:                                      
-            # из доступных кабинетов выбираем первый доступный 
+        else:
+            # из доступных кабинетов выбираем первый доступный
             # и записываем его в интервал
             for cabinet, avaliable in avaliable_cabinets.items():
                 if avaliable:
@@ -57,7 +59,7 @@ def make_schedule_v2(
     doctors: list[Doctor],
     intervals: list[Interval],
 ) -> list[Interval]:
-    """Версия вторая
+    """Версия вторая.
 
     doctors - список докторов
     intervals - список интервалов
@@ -76,7 +78,7 @@ def make_schedule_v2(
     у интервала id, start, end, doctor, cabinet
 
     исключение!! список кабинетов для доктора - doctor.cabinets.all()
-    
+
     перезаписать кабинет и сохранить интервал в бд:
     interval.cabinet = cabinet
     interval.save()

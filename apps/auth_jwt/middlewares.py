@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.http import HttpRequest
+
 from ninja.security import HttpBearer
 
 from apps.auth_jwt.services import get_user_id_from_token

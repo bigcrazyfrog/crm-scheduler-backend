@@ -67,7 +67,6 @@ def get_tests_router() -> Router:
     return router
 
 
-
 def add_algorithms_router(api: NinjaAPI) -> NinjaAPI:
     """Add algorithms router to REST API."""
     api.add_router("algorithms/", get_algorithms_router())

@@ -7,4 +7,3 @@ class AlgorithmAppConfig(AppConfig):
 
     name = "apps.algorithm"
     verbose_name = _("algorithm")
-

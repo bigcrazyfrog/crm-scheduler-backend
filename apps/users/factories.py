@@ -1,7 +1,8 @@
 import uuid
 
-import factory
 from django.conf import settings
+
+import factory
 
 from . import models
 

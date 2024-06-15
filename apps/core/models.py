@@ -1,6 +1,7 @@
 import typing
 
 from django.core.exceptions import ValidationError
+
 from django_extensions.db.models import TimeStampedModel
 
 
