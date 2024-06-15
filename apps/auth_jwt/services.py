@@ -2,9 +2,14 @@ from datetime import datetime
 
 import jwt
 
+from config.settings import (
+    JWT_ACCESS_SECRET,
+    JWT_ACCESS_TOKEN_LIFETIME,
+    JWT_REFRESH_SECRET,
+    JWT_REFRESH_TOKEN_LIFETIME,
+)
+
 from apps.users.models import User
-from config.settings import (JWT_ACCESS_SECRET, JWT_ACCESS_TOKEN_LIFETIME,
-                             JWT_REFRESH_SECRET, JWT_REFRESH_TOKEN_LIFETIME)
 
 from .models import RefreshToken
 
