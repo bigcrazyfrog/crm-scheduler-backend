@@ -12,7 +12,7 @@ class IntervalAdd(ModelSchema):
 
     class Meta:
         model = Interval
-        fields = ["start", "end", "doctor", "schedule"]
+        fields = ["start", "end", "cabinet", "doctor", "schedule"]
 
 
 class IntervalOut(ModelSchema):

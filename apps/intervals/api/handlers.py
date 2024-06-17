@@ -1,5 +1,6 @@
 from django.http import HttpRequest
 
+from apps.cabinets.models import Cabinet
 from apps.core.api.schemas import Message
 from apps.doctors.models import Doctor
 from apps.intervals.api.schemas import IntervalAdd, IntervalOut
@@ -29,9 +30,14 @@ def add(
     if schedule is None:
         return 404, {"message": "Schedule not found"}
 
+    cabinet = Cabinet.objects.filter(id=interval_data.cabinet).first()
+    if cabinet is None and interval_data.cabinet is not None:
+        return 404, {"message": "Cabinet not found"}
+
     interval = Interval.objects.create(
         start=interval_data.start,
         end=interval_data.end,
+        cabinet=cabinet,
         doctor=doctor,
         schedule=schedule,
     )
@@ -72,8 +78,13 @@ def update(
     if schedule is None:
         return 404, {"message": "Schedule not found"}
 
+    cabinet = Cabinet.objects.filter(id=interval_data.cabinet).first()
+    if cabinet is None and interval_data.cabinet is not None:
+        return 404, {"message": "Cabinet not found"}
+
     interval.start = interval_data.start
     interval.end = interval_data.end
+    interval.cabinet = cabinet
     interval.doctor = doctor
     interval.schedule = schedule
     interval.save()
