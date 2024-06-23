@@ -21,7 +21,7 @@ services:
 
   app:
     container_name: redrock_sheduler__app
-    image: $DOCKER_NAMESPACE/$IMAGE_NAME:main
+    image: $DOCKER_NAMESPACE/$IMAGE_NAME:$IMAGE_TAG
     command: bash docker-entrypoint.sh
     volumes:
       - "static_volume:/static/"
