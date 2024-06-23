@@ -10,7 +10,7 @@ INSTALLED_APPS = [
 
 LOCAL_APPS = [
     "apps.users",
-    # "apps.auth_jwt",
+    "apps.auth_jwt",
     "apps.cabinets",
     "apps.doctors",
     "apps.intervals",

@@ -6,35 +6,38 @@ from ninja import NinjaAPI
 from config.settings import DEBUG
 
 from apps.algorithm.api.routers import add_algorithms_router, add_tests_router
-# from apps.auth_jwt.api.routers import add_auth_router
-# from apps.auth_jwt.middlewares import HTTPJWTAuth
+from apps.auth_jwt.api.routers import add_auth_router
+from apps.auth_jwt.middlewares import HTTPJWTAuth
 from apps.cabinets.api.routers import add_cabinets_router
 from apps.doctors.api.routers import add_doctors_router
 from apps.intervals.api.routers import add_intervals_router
 from apps.schedule.api.routers import add_schedules_router
-
-# from apps.users.api.routers import add_users_router
+from apps.users.api.routers import add_users_router
 
 
 def get_api() -> NinjaAPI:
     """Assembly point of general API."""
-    # auth = [HTTPJWTAuth()]
+    auth = [HTTPJWTAuth()]
 
     api = NinjaAPI(
         title="REDROCK.SCHEDULER.BACKEND",
         version="0.1.0",
         description="The best API",
-        # auth=auth,
+        auth=auth,
     )
 
-    # add_auth_router(api=api)
-    # add_users_router(api=api)
+    # List of routers
+    add_auth_router(api=api)
+    add_users_router(api=api)
     add_doctors_router(api=api)
     add_cabinets_router(api=api)
     add_intervals_router(api=api)
     add_algorithms_router(api=api)
     add_schedules_router(api=api)
-    add_tests_router(api=api)
+
+    # Debug routes
+    if DEBUG:
+        add_tests_router(api=api)
 
     return api
 
