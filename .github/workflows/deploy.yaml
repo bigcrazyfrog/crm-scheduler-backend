@@ -2,7 +2,7 @@ name: CI/CD
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "develop" ]
 
 jobs:
   push_to_registry:
@@ -18,9 +18,13 @@ jobs:
           username: ${{ secrets.DOCKER_EMAIL }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: 'Create env file'
-        run: |
-          echo "${{ secrets.ENV_FILE }}" > .env
+      - name: Change stand params
+        run: | 
+          if [[ github.ref_name == 'main' ]]; then 
+            echo "${{ secrets.ENV_FILE_PROD }}" > .env;
+          else 
+            echo "${{ secrets.ENV_FILE_DEV }}" > .env; 
+          fi
       
       - name: Extract metadata (tags, labels) for Docker
         id: meta
@@ -48,10 +52,11 @@ jobs:
           docker login -u ${{ secrets.DOCKER_EMAIL }} -p ${{ secrets.DOCKER_PASSWORD }}
       - name: Pull docker image
         run: |
-          docker pull ${{ secrets.DOCKER_NAMESPACE }}/${{ secrets.IMAGE_NAME }}:main
+          docker pull ${{ secrets.DOCKER_NAMESPACE }}/${{ secrets.IMAGE_NAME }}:${{ github.ref_name }}
       - name: 'Create env file'
         run: |
           echo "${{ secrets.ENV_FILE }}" > .env
+          echo "IMAGE_TAG=${{ github.ref_name }}" >> $GITHUB_ENV
       - name: docker compose
         run: |
           docker-compose -f docker-compose-prod.yml up -d --build
