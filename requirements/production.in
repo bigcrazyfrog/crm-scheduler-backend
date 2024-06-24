@@ -12,9 +12,18 @@ django-extensions
 # https://django-filter.readthedocs.io/en/stable/
 django-filter
 
+# Django health check
+# This project checks for various conditions and provides reports when anomalous behavior is detected.
+# https://github.com/KristianOellegaard/django-health-check
+django-health-check
+
 # Building APIs with Django
 # https://django-ninja.dev/
 django-ninja
+
+# Redis cache backend for Django
+# https://github.com/jazzband/django-redis
+django-redis
 
 # Gitlint is a git commit message linter written in python: it checks your commit messages for style.
 # https://jorisroovers.com/gitlint/
@@ -64,6 +73,13 @@ mypy
 # Database abstraction layer
 # https://pypi.org/project/psycopg-binary/
 psycopg[binary]
+
+# Celery
+# https://docs.celeryproject.org/en/stable/
+celery[redis]
+# Periodic tasks
+# https://github.com/celery/django-celery-beat
+django-celery-beat
 
 # Encode and decode JSON Web Tokens (RFC 7519) 
 # https://pypi.org/project/PyJWT/
