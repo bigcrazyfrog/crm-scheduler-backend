@@ -37,6 +37,16 @@ class AdminUserFactory(UserFactory):
 
     is_superuser = True
     is_staff = True
+    is_premium = True
+
+    class Meta:
+        model = models.User
+
+
+class PremiumUserFactory(UserFactory):
+    """Factory to generate test User model with premium's privileges."""
+
+    is_premium = True
 
     class Meta:
         model = models.User
