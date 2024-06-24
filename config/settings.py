@@ -40,6 +40,15 @@ JWT_ACCESS_TOKEN_LIFETIME = datetime.timedelta(minutes=int(env("JWT_ACCESS_TOKEN
 JWT_REFRESH_TOKEN_LIFETIME = datetime.timedelta(days=int(env("JWT_REFRESH_TOKEN_LIFETIME")))
 
 # -----------------------------------------------------------------------------
+# Yoomoney integration
+# https://yoomoney.ru/about
+# -----------------------------------------------------------------------------
+YOOMONEY_TOKEN = env("YOOMONEY_TOKEN")
+RECIPIENT_ACCOUNT = env("RECIPIENT_ACCOUNT")
+SUBSCRIPTION_COST = 2 # Two rubles
+MINIMUM_PAYMENT = 1.9
+
+# -----------------------------------------------------------------------------
 # DATABASES - PostgreSQL
 # -----------------------------------------------------------------------------
 DATABASES["default"].update(

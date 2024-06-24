@@ -68,3 +68,11 @@ psycopg[binary]
 # Encode and decode JSON Web Tokens (RFC 7519) 
 # https://pypi.org/project/PyJWT/
 PyJWT
+
+# Requests is a simple, yet elegant, HTTP library.
+# https://pypi.org/project/requests/
+requests
+
+# This is YooMoney API python library.
+# https://pypi.org/project/YooMoney/
+yoomoney

@@ -21,6 +21,7 @@ class UserAdmin(DjangoUserAdmin, BaseAdmin):
         "email",
         "is_staff",
         "is_superuser",
+        "is_premium",
     )
     list_display_links = (
         "username",
@@ -72,6 +73,7 @@ class UserAdmin(DjangoUserAdmin, BaseAdmin):
             _("Permissions"),
             {
                 "fields": (
+                    "is_premium",
                     "is_active",
                     "is_staff",
                     "is_superuser",
