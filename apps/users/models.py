@@ -13,6 +13,11 @@ class User(AbstractUser, BaseModel):
         max_length=254,  # to be compliant with RFCs 3696 and 5321
         unique=True,
     )
+    is_premium = models.BooleanField(
+        verbose_name=_("Is premium"),
+        help_text=_("User with premium status"),
+        default=False,
+    )
 
     USERNAME_FIELD = "email"
     EMAIL_FIELD = "email"
