@@ -12,7 +12,7 @@ from config.settings import (
 client = Client(YOOMONEY_TOKEN)
 
 
-def get_user_transactions(user_id: str) -> History:
+def get_user_transactions(user_id: str | None) -> History:
     """Get user transactions.
 
     Return user transactions from 7 days ago.
