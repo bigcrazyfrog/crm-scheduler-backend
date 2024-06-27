@@ -19,7 +19,15 @@ services:
     networks:
       - iris
 
-  app:
+  redis:
+    image: redis:6.0.5
+    ports:
+      - "6379:6379"
+    logging: *x-logging
+    networks:
+      - iris
+
+  app: &app
     container_name: redrock_sheduler__app
     image: $DOCKER_NAMESPACE/$IMAGE_NAME:$IMAGE_TAG
     command: bash docker-entrypoint.sh
@@ -59,6 +67,13 @@ services:
     restart: always
     networks:
       - iris
+
+  celery:
+    <<: *app
+    container_name: redrock_sheduler__celery
+    # start both worker and beat in same CMD for simplicity
+    command: celery --app config.celery:app worker --beat --scheduler=django --loglevel=info
+    ports: []
 
 volumes:
   postgres_data:

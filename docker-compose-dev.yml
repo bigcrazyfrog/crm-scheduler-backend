@@ -1,31 +1,57 @@
 version: "3.9"
 
 services:
+  # ################################################################################
+  # Database
+  # ################################################################################
   postgres:
     image: postgres:13
-    env_file:
-      - .env
     ports:
       - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h postgres -t 5 -U ${POSTGRES_USER} || false"]
+      interval: 1s
+      timeout: 5s
+      retries: 10
+    env_file:
+      - .env
     volumes:
       - postgres_data:/var/lib/postgresql/data/
-    networks:
-      - iris
 
-  # app:
-  #   container_name: app
-  #   build: .
-  #   ports:
-  #     - "8000:8000"
-  #   command: bash docker-entrypoint.sh
-  #   depends_on:
-  #     - postgres
-  #   networks:
-  #     - iris
+  # ################################################################################
+  # Caching
+  # ################################################################################
+  redis:
+    image: redis:6.0.5
+    ports:
+      - "6379:6379"
+
+  # ################################################################################
+  # Django Backend / API
+  # ################################################################################
+  web: &web
+    build: .
+    volumes:
+      - ./:/workspace
+    environment:
+      - DJANGO_SETTINGS_MODULE=config.settings
+    ports:
+      - "8000:8000"
+    command: python3 manage.py runserver 0.0.0.0:8000
+    depends_on:
+      postgres:
+          condition: service_healthy
+      redis:
+          condition: service_started
+  # ################################################################################
+  # Celery scheduler/worker
+  # ################################################################################
+  celery:
+    <<: *web
+    # start both worker and beat in same CMD for simplicity
+    command: celery --app config.celery:app worker --beat --scheduler=django --loglevel=info
+    ports: []
+
 
 volumes:
   postgres_data:
-
-networks:
-  iris:
-    driver: bridge

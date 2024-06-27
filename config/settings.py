@@ -60,6 +60,16 @@ DATABASES["default"].update(
     PORT=env("POSTGRES_PORT"),
 )
 
+# -----------------------------------------------------------------------------
+# CELERY
+# -----------------------------------------------------------------------------
+redis_host = env.str("REDIS_HOST")
+redis_port = env.int("REDIS_PORT")
+redis_db = env.int("REDIS_DB")
+
+CELERY_BROKER_URL = f"redis://{redis_host}:{redis_port}/{redis_db}"
+CELERY_RESULT_BACKEND = f"redis://{redis_host}:{redis_port}/{redis_db}"
+
 DEFAULT_CHARSET = "utf-8"
 
 # Static files (CSS, JavaScript, Images)

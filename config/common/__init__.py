@@ -6,6 +6,7 @@ from .authentication import *
 # Business Logic Custom Variables and Settings
 # -----------------------------------------------------------------------------
 from .business_logic import *
+from .celery import *
 from .databases import *
 from .installed_apps import *
 from .internationalization import *
