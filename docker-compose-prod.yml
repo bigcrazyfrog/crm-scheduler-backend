@@ -7,7 +7,6 @@ x-logging: &x-logging
 
 services:
   postgres:
-    container_name: redrock_sheduler__postgres
     image: postgres:13
     env_file:
       - .env
@@ -19,16 +18,7 @@ services:
     networks:
       - iris
 
-  redis:
-    image: redis:6.0.5
-    ports:
-      - "6379:6379"
-    logging: *x-logging
-    networks:
-      - iris
-
-  app: &app
-    container_name: redrock_sheduler__app
+  app:
     image: $DOCKER_NAMESPACE/$IMAGE_NAME:$IMAGE_TAG
     command: bash docker-entrypoint.sh
     volumes:
@@ -42,7 +32,6 @@ services:
       - iris
 
   nginx:
-    container_name: redrock_sheduler__nginx
     build: ./nginx
 
     volumes:
@@ -58,7 +47,6 @@ services:
       - iris
 
   nginx-exporter:
-    container_name: redrock_sheduler__nginx-exporter
     build: ./nginx-exporter
 
     volumes: ["nginx_log_volume:/var/log/nginx/"]
@@ -67,13 +55,6 @@ services:
     restart: always
     networks:
       - iris
-
-  celery:
-    <<: *app
-    container_name: redrock_sheduler__celery
-    # start both worker and beat in same CMD for simplicity
-    command: celery --app config.celery:app worker --beat --scheduler=django --loglevel=info
-    ports: []
 
 volumes:
   postgres_data:

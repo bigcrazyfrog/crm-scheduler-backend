@@ -20,7 +20,8 @@ jobs:
 
       - name: Change stand params
         run: | 
-          if [[ github.ref_name == 'main' ]]; then 
+          echo "It is ${GITHUB_REF##*/}";
+          if [[ "${GITHUB_REF##*/}" == "main" ]]; then 
             echo "${{ secrets.ENV_FILE_PROD }}" > .env;
           else 
             echo "${{ secrets.ENV_FILE_DEV }}" > .env; 
@@ -53,11 +54,15 @@ jobs:
       - name: Pull docker image
         run: |
           docker pull ${{ secrets.DOCKER_NAMESPACE }}/${{ secrets.IMAGE_NAME }}:${{ github.ref_name }}
-      - name: 'Create env file'
-        run: |
-          echo "${{ secrets.ENV_FILE }}" > .env
+      - name: "Create env file"
+        run: | 
+          if [[ "${GITHUB_REF##*/}" == "main" ]]; then 
+            echo "${{ secrets.ENV_FILE_PROD }}" > .env;
+          else 
+            echo "${{ secrets.ENV_FILE_DEV }}" > .env; 
+          fi
           echo "IMAGE_TAG=${{ github.ref_name }}" >> $GITHUB_ENV
       - name: docker compose
         run: |
-          docker-compose -f docker-compose-prod.yml up -d --build
+          docker-compose --project-name ${GITHUB_REF##*/} -f docker-compose-prod.yml up -d --build
           docker system prune -f
