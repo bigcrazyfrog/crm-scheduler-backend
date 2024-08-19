@@ -24,12 +24,12 @@ def get_api() -> NinjaAPI:
         title="REDROCK.SCHEDULER.BACKEND",
         version="0.1.0",
         description="The best API",
-        auth=auth,
+        # auth=auth,
     )
 
     # List of routers
-    add_auth_router(api=api)
-    add_users_router(api=api)
+    # add_auth_router(api=api)
+    # add_users_router(api=api)
     add_doctors_router(api=api)
     add_cabinets_router(api=api)
     add_intervals_router(api=api)
