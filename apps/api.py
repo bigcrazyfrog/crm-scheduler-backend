@@ -28,7 +28,7 @@ def get_api() -> NinjaAPI:
     )
 
     # List of routers
-    add_auth_router(api=api)
+    # add_auth_router(api=api)
     add_users_router(api=api)
     add_doctors_router(api=api)
     add_cabinets_router(api=api)
