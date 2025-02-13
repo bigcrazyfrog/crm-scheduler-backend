@@ -12,4 +12,3 @@ RUN apt-get update && \
     pip install -r requirements/production.txt
 
 COPY . .
-

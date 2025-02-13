@@ -19,7 +19,7 @@ services:
       - iris
 
   app:
-    image: $DOCKER_NAMESPACE/$IMAGE_NAME:$IMAGE_TAG
+    build: .
     command: bash docker-entrypoint.sh
     volumes:
       - "static_volume:/static/"

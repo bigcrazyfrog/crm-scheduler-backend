@@ -21,36 +21,22 @@ services:
   # ################################################################################
   # Caching
   # ################################################################################
-  redis:
-    image: redis:6.0.5
-    ports:
-      - "6379:6379"
 
   # ################################################################################
   # Django Backend / API
   # ################################################################################
-  web: &web
+  web:
     build: .
     volumes:
       - ./:/workspace
     environment:
       - DJANGO_SETTINGS_MODULE=config.settings
     ports:
-      - "8000:8000"
+      - "8001:8000"
     command: python3 manage.py runserver 0.0.0.0:8000
-    depends_on:
-      postgres:
-          condition: service_healthy
-      redis:
-          condition: service_started
   # ################################################################################
   # Celery scheduler/worker
   # ################################################################################
-  celery:
-    <<: *web
-    # start both worker and beat in same CMD for simplicity
-    command: celery --app config.celery:app worker --beat --scheduler=django --loglevel=info
-    ports: []
 
 
 volumes:
