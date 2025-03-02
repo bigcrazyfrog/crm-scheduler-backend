@@ -1,0 +1,48 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:13
+    env_file:
+      - .env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+
+    restart: always
+    networks:
+      - iris
+
+  app:
+    image: $DOCKER_NAMESPACE/$IMAGE_NAME:$IMAGE_TAG
+    command: bash docker-entrypoint.sh
+    volumes:
+      - "static_volume:/static/"
+      - "media_volume:/media/"
+
+    depends_on:
+      - postgres
+    networks:
+      - iris
+
+  nginx:
+    build: ./nginx
+
+    volumes:
+      - "static_volume:/static/"
+      - "nginx_log_volume:/var/log/nginx/"
+      - "media_volume:/media/"
+
+    ports: ["8005:80"]
+
+    networks:
+      - iris
+
+volumes:
+  postgres_data:
+  nginx_log_volume:
+  static_volume:
+  media_volume:
+
+networks:
+  iris:
+    driver: bridge
