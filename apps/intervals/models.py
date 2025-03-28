@@ -36,6 +36,9 @@ class Interval(BaseModel):
         on_delete=models.CASCADE,
         related_name="cabinets",
     )
+    status = models.IntegerField(
+        default=0,
+    )
 
     class Meta:
         verbose_name = _("Interval")
