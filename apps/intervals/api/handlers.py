@@ -40,6 +40,7 @@ def add(
         cabinet=cabinet,
         doctor=doctor,
         schedule=schedule,
+        status=interval_data.status,
     )
     return 201, interval
 
@@ -87,6 +88,7 @@ def update(
     interval.cabinet = cabinet
     interval.doctor = doctor
     interval.schedule = schedule
+    interval.status = interval_data.status,
     interval.save()
 
     return 200, interval
