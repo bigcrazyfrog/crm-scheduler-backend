@@ -25,6 +25,8 @@ def generate_random_data_for_intervals(n=10, days=1717339746):
                 time + random.randint(60 * 60, 60 * 60 * 7),
             ),
         )
+    
+    return True
 
 
 def generate_random_data_for_doctors(n=10):
