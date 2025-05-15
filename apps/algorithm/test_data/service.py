@@ -3,6 +3,7 @@ from datetime import datetime
 
 from apps.cabinets.factories import CabinetFactory
 from apps.cabinets.models import Cabinet
+from apps.clients.models import Client
 from apps.doctors.factories import DoctorFactory
 from apps.doctors.models import Doctor
 from apps.intervals.models import Interval
@@ -14,6 +15,7 @@ def generate_random_data_for_intervals(n=10, days=1717339746):
     """Generate random data for testing."""
     schedule = ScheduleFactory()
     doctors = Doctor.objects.all()
+    clients = Client.objects.all()
 
     for _ in range(n):
         time = random.randint(days, days + 24 * 60 * 60 * 7)
@@ -24,6 +26,7 @@ def generate_random_data_for_intervals(n=10, days=1717339746):
             end=datetime.fromtimestamp(
                 time + random.randint(60 * 60, 60 * 60 * 7),
             ),
+            client=random.choice(clients),
         )
     
     return True

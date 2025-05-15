@@ -39,6 +39,14 @@ class Interval(BaseModel):
     status = models.IntegerField(
         default=0,
     )
+    client = models.ForeignKey(
+        "clients.Client",
+        verbose_name=_("client"),
+        related_name="intervals",
+        on_delete=models.CASCADE,
+        blank=True,
+        default=None,
+    )
 
     class Meta:
         verbose_name = _("Interval")

@@ -17,6 +17,7 @@ LOCAL_APPS = [
     "apps.algorithm",
     "apps.payments",
     "apps.schedule",
+    "apps.clients",
 ]
 
 INSTALLED_APPS += LOCAL_APPS

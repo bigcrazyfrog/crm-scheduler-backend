@@ -14,6 +14,7 @@ from apps.intervals.api.routers import add_intervals_router
 from apps.payments.api.routers import add_payments_router
 from apps.schedule.api.routers import add_schedules_router
 from apps.users.api.routers import add_users_router
+from apps.clients.api.routers import add_clients_router
 
 
 def get_api() -> NinjaAPI:
@@ -36,6 +37,7 @@ def get_api() -> NinjaAPI:
     add_algorithms_router(api=api)
     add_payments_router(api=api)
     add_schedules_router(api=api)
+    add_clients_router(api=api)
 
     # Debug routes
     if DEBUG:

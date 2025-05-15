@@ -1,3 +1,4 @@
+from apps.clients.api.schemas import ClientOut
 from ninja import ModelSchema
 
 from apps.cabinets.api.schemas import CabinetOut
@@ -12,7 +13,7 @@ class IntervalAdd(ModelSchema):
 
     class Meta:
         model = Interval
-        fields = ["start", "end", "cabinet", "doctor", "schedule", "status"]
+        fields = ["start", "end", "cabinet", "doctor", "schedule", "status", "client"]
 
 
 class IntervalOut(ModelSchema):
@@ -21,6 +22,7 @@ class IntervalOut(ModelSchema):
     doctor: DoctorOut
     schedule: ScheduleOut
     cabinet: CabinetOut | None
+    client: ClientOut | None
 
     class Meta:
         model = Interval

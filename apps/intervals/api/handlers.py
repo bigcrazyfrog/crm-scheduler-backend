@@ -1,6 +1,7 @@
 from django.http import HttpRequest
 
 from apps.cabinets.models import Cabinet
+from apps.clients.models import Client
 from apps.core.api.schemas import Message
 from apps.doctors.models import Doctor
 from apps.intervals.api.schemas import IntervalAdd, IntervalOut
@@ -34,6 +35,10 @@ def add(
     if cabinet is None and interval_data.cabinet is not None:
         return 404, {"message": "Cabinet not found"}
 
+    client = Client.objects.filter(id=interval_data.client).first()
+    if client is None and interval_data.client is not None:
+        return 404, {"message": "Client not found"}
+
     interval = Interval.objects.create(
         start=interval_data.start,
         end=interval_data.end,
@@ -41,6 +46,7 @@ def add(
         doctor=doctor,
         schedule=schedule,
         status=interval_data.status,
+        client=client,
     )
     return 201, interval
 
