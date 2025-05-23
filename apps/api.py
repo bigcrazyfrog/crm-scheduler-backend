@@ -10,7 +10,7 @@ from apps.auth_jwt.api.routers import add_auth_router
 from apps.auth_jwt.middlewares import HTTPJWTAuth
 from apps.cabinets.api.routers import add_cabinets_router
 from apps.doctors.api.routers import add_doctors_router
-from apps.intervals.api.routers import add_intervals_router
+from apps.intervals.api.routers import add_intervals_router, add_notifications_router
 from apps.payments.api.routers import add_payments_router
 from apps.schedule.api.routers import add_schedules_router
 from apps.users.api.routers import add_users_router
@@ -38,6 +38,7 @@ def get_api() -> NinjaAPI:
     add_payments_router(api=api)
     add_schedules_router(api=api)
     add_clients_router(api=api)
+    add_notifications_router(api=api)
 
     # Debug routes
     if DEBUG:

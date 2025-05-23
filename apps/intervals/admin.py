@@ -21,6 +21,7 @@ class IntervalAdmin(BaseAdmin):
         "doctor",
         "cabinet",
         "status",
+        "notification",
     )
     search_fields = (
         "doctor",
@@ -54,6 +55,8 @@ class IntervalAdmin(BaseAdmin):
                     "doctor",
                     "cabinet",
                     "status",
+                    "notification",
+                    "client"
                 ),
             },
         ),

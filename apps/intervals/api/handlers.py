@@ -113,3 +113,28 @@ def delete(
 
     interval.delete()
     return 200, {"message": "Successful delete"}
+
+
+def notification_all(
+    request: HttpRequest,
+) -> tuple[int, Message | IntervalOut]:
+    """Get a list of all existing notifications."""
+    intervals = Interval.objects.filter(notification=True)
+    return 200, list(intervals)
+
+
+def notification_resolve(
+    request: HttpRequest,
+    interval_id: str,
+) -> tuple[int, Message | IntervalOut]:
+    """Update existing interval fields."""
+    interval = Interval.objects.filter(
+        id=interval_id,
+    ).first()
+    if interval is None:
+        return 404, {"message": "Interval not found"}
+
+    interval.notification = False
+    interval.save()
+
+    return 200, {"message": "Successful resolve"}

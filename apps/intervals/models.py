@@ -47,6 +47,10 @@ class Interval(BaseModel):
         blank=True,
         default=None,
     )
+    notification = models.BooleanField(
+        verbose_name=_("notification"),
+        default=True,
+    )
 
     class Meta:
         verbose_name = _("Interval")
